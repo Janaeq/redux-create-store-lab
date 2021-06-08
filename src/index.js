@@ -2,19 +2,24 @@ function createStore(reducer) {
   let state;
 
   function dispatch(action) {
-    state = reducer(state, action);
-    render();
+    state = reducer(state, action)
+    render()
   }
 
   function getState() {
-    return state;
+    return state
   }
-  return { dispatch, getState };
+
+  return {
+    dispatch,
+    getState
+  }
+
 }
 
 function candyReducer(state = [], action) {
   switch (action.type) {
-    case "ADD_CANDY":
+    case 'ADD_CANDY':
       return [...state, action.candy];
     default:
       return state;
@@ -22,24 +27,16 @@ function candyReducer(state = [], action) {
 }
 
 function render() {
-  let container = document.getElementById("container");
+  let container = document.getElementById('container');
   if (store.getState()) {
-    container.textContent = store.getState().join(" ");
+    container.textContent = store.getState().join(' ')
   } else {
-    throw new Error("the store's state has not been defined yet");
+    throw new Error("the store's state has not been defined yet")
   }
-}
+};
 
 // Use your createStore function and the functions provided here to create a store.
 // Once the store is created, call an initial dispatch.
-let store = createStore(candyReducer);
-store.dispatch({ type: "@@INIT" });
+let store = createStore(candyReducer)
 
-function createCandy(candy) {
-  return {
-    type: "ADD_CANDY",
-    candy: candy,
-  };
-}
-
-store.dispatch(createCandy("Twix"));
+store.dispatch({ type: "@@INIT" })
